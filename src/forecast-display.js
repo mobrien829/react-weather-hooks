@@ -15,17 +15,20 @@ const ForecastDisplay = () => {
     if (forecast) {
       const unix_time = forecast.location.localtime_epoch;
       const dateObject = new Date(unix_time * 1000);
+      const month =
+        dateObject.getUTCMonth() + 1 < 10
+          ? `0` + (dateObject.getUTCMonth() + 1)
+          : dateObject.getUTCMonth() + 1;
       setDate({
         year: dateObject.getUTCFullYear(),
-        month: dateObject.getUTCMonth(),
-        day: dateObject.getUTCDate(),
+        month,
         weekday: dateObject.getUTCDay(),
-        forecastKey: `${dateObject.getUTCFullYear()}-${dateObject.getUTCMonth()}-${dateObject.getUTCDate()}`,
+        forecastKey: `${dateObject.getUTCFullYear()}-${month}-${dateObject.getUTCDate()}`,
       });
     }
-  }, [forecast]);
+  }, [forecast, date]);
   if (forecast) {
-    console.log(forecast.forecast.keys);
+    console.log(forecast);
   }
   return forecast ? (
     <div>{`Weather for ${forecast.location.country} on ${date.year}: Currently ${forecast.current.temperature} degrees, precipitation is ${forecast.current.precip}mm, humidity of ${forecast.current.humidity}%. The high will be ${forecast.forecast.maxtemp} and the low will be ${forecast.forecast.mintemp}`}</div>

@@ -26,7 +26,7 @@ const ForecastDisplay = () => {
         forecastKey: `${dateObject.getUTCFullYear()}-${month}-${dateObject.getUTCDate()}`,
       });
     }
-  }, [forecast, date]);
+  }, [forecast]);
   if (forecast) {
     console.log(forecast);
   }

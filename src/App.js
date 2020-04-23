@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import logo from "./logo.svg";
+import { WeatherContext } from "./contexts/weather-context";
+import ForecastDisplay from "./forecast-display";
 import "./App.css";
 
 function App() {
   const [location, setLocation] = useState();
-  const [lastForecast, setLastForecast] = useState();
+  const [lastForecast, setLastForecast] = useContext(WeatherContext);
   const fetchWeather = (event) => {
     event.preventDefault();
 
@@ -12,30 +14,12 @@ function App() {
       `https://still-depths-86857.herokuapp.com/forecast?location=${location}`
     )
       .then((res) => res.json())
-      .then((data) => setLastForecast(data));
+      .then((data) => setLastForecast(data.forecastData));
   };
-  useEffect(() => {
-    if (lastForecast) {
-      console.log(lastForecast);
-    }
-  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <div>
+      <header>
         <form onSubmit={(event) => fetchWeather(event)}>
           <label>
             Location
@@ -48,6 +32,9 @@ function App() {
           </label>
           <input type="submit" value="Get Weather" />
         </form>
+      </header>
+      <div>
+        <ForecastDisplay />
       </div>
     </div>
   );

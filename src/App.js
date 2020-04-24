@@ -7,6 +7,7 @@ import "./App.css";
 function App() {
   const [location, setLocation] = useState();
   const [lastForecast, setLastForecast] = useContext(WeatherContext);
+  const [forecastKey, setForecastKey] = useState();
   const fetchWeather = (event) => {
     event.preventDefault();
 
@@ -14,7 +15,13 @@ function App() {
       `https://still-depths-86857.herokuapp.com/forecast?location=${location}`
     )
       .then((res) => res.json())
-      .then((data) => setLastForecast(data.forecastData));
+      .then((data) => handleForecastData(data.forecastData));
+  };
+
+  const handleForecastData = (data) => {
+    setLastForecast(data);
+    setForecastKey(Object.keys(data.forecast)[0]);
+    // setForecastKey(data.forecastData.forecast)
   };
 
   return (
@@ -34,7 +41,7 @@ function App() {
         </form>
       </header>
       <div>
-        <ForecastDisplay />
+        <ForecastDisplay forecastKey={forecastKey} />
       </div>
     </div>
   );

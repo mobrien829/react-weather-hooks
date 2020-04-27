@@ -27,12 +27,12 @@ function App() {
   return (
     <div className="App">
       <header>
-        <form onSubmit={(event) => fetchWeather(event)}>
+        <form className="search-form" onSubmit={(event) => fetchWeather(event)}>
           <label>
-            Location
+            Location:
             <input
+              className="search-field"
               type="text"
-              placeholder="Location"
               name="location"
               onChange={(event) => setLocation(event.target.value)}
             />

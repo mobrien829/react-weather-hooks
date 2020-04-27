@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { WeatherContext } from "./contexts/weather-context";
+import "./App.css";
 
 const ForecastDisplay = ({ forecastKey }) => {
   const [forecast] = useContext(WeatherContext);
@@ -30,7 +31,7 @@ const ForecastDisplay = ({ forecastKey }) => {
     }
   };
   return forecastData && forecast ? (
-    <div>{`Weather for ${locationHelper(
+    <div className="forecast">{`Weather for ${locationHelper(
       forecast.location
     )} on ${date}: Currently ${
       forecast.current.temperature
@@ -40,7 +41,7 @@ const ForecastDisplay = ({ forecastKey }) => {
       forecastData.mintemp
     }`}</div>
   ) : (
-    <div>Please search for a location</div>
+    <div className="forecast">Please search for a location</div>
   );
 };
 

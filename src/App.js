@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
-import logo from "./logo.svg";
+import React, { useState, useContext } from "react";
 import { WeatherContext } from "./contexts/weather-context";
 import ForecastDisplay from "./forecast-display";
+import SearchForm from "./search-form";
 import "./App.css";
 
 function App() {
@@ -27,19 +27,14 @@ function App() {
   return (
     <div className="App">
       <header>
-        <form className="search-form" onSubmit={(event) => fetchWeather(event)}>
-          <label>
-            Location:
-            <input
-              className="search-field"
-              type="text"
-              name="location"
-              onChange={(event) => setLocation(event.target.value)}
-            />
-          </label>
-          <input type="submit" value="Get Weather" />
-        </form>
+        <div className="about-app">
+          <h1 className="app-title">Weathering Hooks</h1>
+          <p className="app-description">
+            A simple, hook-based React.js weather app
+          </p>
+        </div>
       </header>
+      <SearchForm setLocation={setLocation} fetchWeather={fetchWeather} />
       <div>
         <ForecastDisplay forecastKey={forecastKey} />
       </div>

@@ -31,17 +31,21 @@ const ForecastDisplay = ({ forecastKey }) => {
     }
   };
   return forecastData && forecast ? (
-    <div className="forecast">{`Weather for ${locationHelper(
-      forecast.location
-    )} on ${date}: Currently ${
-      forecast.current.temperature
-    } degrees, precipitation is ${forecast.current.precip}mm, humidity of ${
-      forecast.current.humidity
-    }%. The high will be ${forecastData.maxtemp} and the low will be ${
-      forecastData.mintemp
-    }`}</div>
+    <div className="weather-container">
+      <div className="forecast">{`Weather for ${locationHelper(
+        forecast.location
+      )} on ${date}: Currently ${
+        forecast.current.temperature
+      } degrees, precipitation is ${forecast.current.precip}mm, humidity of ${
+        forecast.current.humidity
+      }%. The high will be ${forecastData.maxtemp} and the low will be ${
+        forecastData.mintemp
+      }`}</div>
+    </div>
   ) : (
-    <div className="forecast">Please search for a location</div>
+    <div className="weather-container">
+      <div className="forecast">Please search for a location</div>
+    </div>
   );
 };
 
